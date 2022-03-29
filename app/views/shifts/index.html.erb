@@ -1,0 +1,66 @@
+<div class="container">
+<h2 class="my-3 "><%= @user.name %></h2>
+  <div class="row">
+    <div class="col-md-3">
+      <%= form_with model: @shift, url: shifts_path, local:true do |f| %>
+        <div class="form-group">
+        <label for="date">日付</label>
+      　<%= f.date_select :date,
+                            use_two_digit_numbers: true,
+                            start_year: 2022,
+                            end_year: 2022,
+                            default: Date.today,
+                            date_separator: '/', class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+        <label for="start_time">開始</label>
+        <%= f.time_field :start, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+        <label for="finish_time">終了</label>
+        <%= f.time_field :finish, class: "form-control" %>
+        </div>
+
+        <%= f.submit 'シフト入力', class: "btn btn-primary mt-2" %>
+      <% end %>
+    </div>
+
+    <div class="col-md-9">
+        <%= month_calendar events: @user.shifts do |date, shifts| %>
+          <%= date.day %>
+          <% shifts.each do |shift| %>
+            <%= link_to edit_shift_path(shift.id) do %>
+              <%= shift.start.strftime('%R') %>
+              <%= shift.finish.strftime('%R') %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>開始</th>
+            <th>終了</th>
+            <th>稼働時間</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @shifts.each do |user| %>
+          <tr>
+            <td><%= user.date %></td>
+            <td><%= user.start.strftime("%R") %></td>
+            <td><%= user.finish.strftime("%R") %></td>
+            <td><%= user.working_minutes %></td>
+            <td><%= link_to "編集", edit_shift_path(user), class: "btn btn-outline-primary" %></td>
+            <td><%= link_to "削除", shift_path(user), method: :delete, class: "btn btn-outline-primary" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

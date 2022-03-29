@@ -1,0 +1,14 @@
+ <div class="container">
+   <h2 class="font-weight-bold mt-3">ユーザー編集</h2>
+   <%= form_with model: @user, url: user_path(@user), local: true do |f| %>
+     <div class="form-group">
+      <%= f.text_field :name, class: "form-cotrol" %>
+     </div>
+     
+     <div class="form-group">
+       <%= f.text_field :email, class: "form-cotrol" %>
+     </div>
+    
+     <%= f.submit "更新", class: "btn btn-primary" %>
+   <% end %>
+ </div>

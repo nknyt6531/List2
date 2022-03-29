@@ -1,0 +1,33 @@
+<h2 class="font-weight-bold mt-5">全体成績</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>稼働時間</th>
+      <th>コール数</th>
+      <th>コール数/h</th>
+      <th>コンタクト数</th>
+      <th>コンタクト数/h</th>
+      <th>コンタクト率</th>
+      <th>発送数</th>
+      <th>発送数/h</th>
+      <th>発送率</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.working_time %></td>
+      <td><%= user.call_counts %></td>
+      <td><%= user.call_count_hour %></td>
+      <td><%= user.contact_counts %> </td>
+      <td><%= user.contact_count_hour %></td>
+      <td><%= user.contact_count_rate %>%</td>
+      <td><%= user.send_counts %></td>
+      <td><%= user.send_count_hour %></td>
+      <td><%= user.send_count_rate %>%</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,59 @@
+<div class="container px-5 px-sm-0">
+   <div class="row">
+      <div class="col-md-3 mt-3">
+        <p>名前<%= @customer.last_name %><%= @customer.first_name %><%= @customer.gender_id %></p>
+        <p><%= @customer.last_name_kana %><%= @customer.first_name_kana %></p>
+        <p>生年月日<%= @customer.birthday %><%= @customer.age %></p>
+        <p>郵便番号<%= @customer.post_code %></p>
+        <p>住所<%= @customer.address %></p>
+        <p>自宅電話<%= @customer.home_phone_number %></p>
+        <p>携帯電話<%= @customer.phone_number %></p>
+        <p>リスト名<%= @customer.list_group %></p>
+        <%= link_to "", edit_customer_path(@customer.id), class: "btn btn-outline-secondary fas fa-user-cog" %>
+
+        <div class="mt-5">
+        <%= form_with model: @comment, url: customer_comments_path(@customer.id), local: true do |f| %>
+          <div class="form-group">
+            <%= f.select :method, Comment.methods.keys.map, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.select :target, Comment.targets.keys.map, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.select :status, Comment.statuses.keys.map, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.text_area :comment, class: "form-control" %>
+          </div>
+            <%= f.submit "新規コメント", class: "btn btn-primary"%>
+        <% end %>
+        </div>
+      </div>
+
+      <div class="col-md-8 offset-md-1">
+      <table class="table table-bordered mt-3">
+        <tbody>
+        <% @customer.comments.each do |comment| %>
+          <tr>
+            <td><%= comment.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= comment.user.name %></td>
+            <td><%= comment.target %></td>
+            <td rowspan="2"><%= comment.comment %></td>
+            <% if comment.user == current_user %>
+              <td><%= link_to "",  edit_customer_comment_path(comment.customer_id, comment), class: "btn btn-outline-secondar fa fa-edit" %></td>
+            <% end %>
+          </tr>
+          <tr>
+            <td><%= comment.created_at.strftime('%X') %></td>
+            <td><%= comment.method %></td>
+            <td><%= comment.status %></td>
+             <% if comment.user == current_user %>
+               <td><%= link_to "",  customer_comment_path(comment.customer_id, comment), method: :delete, class: "btn btn-outline-secondar fa fa-trash" %></td>
+             <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      </div>
+   </div>
+</div>

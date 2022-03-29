@@ -1,0 +1,61 @@
+<div class="container">
+<h2 class="font-weight-bold mt-3"><%= @user.name %></h2>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>稼働時間</th>
+      <th>コール数</th>
+      <th>コール数/h</th>
+      <th>コンタクト数</th>
+      <th>コンタクト数/h</th>
+      <th>コンタクト率</th>
+      <th>発送数</th>
+      <th>発送数/h</th>
+      <th>発送率</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @user.name %></td>
+      <td><%= @user.working_time %></td>
+      <td><%= @user.call_counts %></td>
+      <td><%= @user.call_count_hour %></td>
+      <td><%= @user.contact_counts %> </td>
+      <td><%= @user.contact_count_hour %></td>
+      <td><%= @user.contact_count_rate %>%</td>
+      <td><%= @user.send_counts %></td>
+      <td><%= @user.send_count_hour %></td>
+      <td><%= @user.send_count_rate %>%</td>
+    </tr>
+    <tr>
+      <td>全体平均</td>
+      <td><%= @working_times_all_avg %></td>
+      <td><%= @call_counts_all_avg %></td>
+      <td><%= @call_counts_hour_all_avg %></td>
+      <td><%= @contact_counts_all_avg %></td>
+      <td><%= @contact_counts_hour_all_avg %></td>
+      <td><%= @contact_counts_rate_all_avg %>%</td>
+      <td><%= @send_counts_all_avg %></td>
+      <td><%= @send_counts_hour_all_avg %></td>
+      <td><%= @send_counts_rate_all_avg %>%</td>
+    </tr>
+    <tr>
+      <td>(比)</td>
+      <td><%= (@user.working_time - @working_times_all_avg).round(2) %></td>
+      <td><%= (@user.call_counts - @call_counts_all_avg).round(2) %></td>
+      <td><%= (@user.call_count_hour - @call_counts_hour_all_avg).round(2) %></td>
+      <td><%= (@user.contact_counts - @contact_counts_all_avg).round(2) %></td>
+      <td><%= (@user.contact_count_hour - @contact_counts_hour_all_avg).round(2) %></td>
+      <td><%= (@user.contact_count_rate - @contact_counts_rate_all_avg).round(3) %>%</td>
+      <td><%= (@user.send_counts - @send_counts_all_avg).round(2) %></td>
+      <td><%= (@user.send_count_hour - @send_counts_hour_all_avg).round(2) %></td>
+      <td><%= (@user.send_count_rate - @send_counts_rate_all_avg).round(3) %>%</td>
+    </tr>
+  </tbody>
+</table>
+
+<%= render 'users/show', users: @users %>
+</div>

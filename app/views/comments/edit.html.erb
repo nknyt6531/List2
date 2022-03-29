@@ -1,0 +1,7 @@
+<%= form_with model: @comment, url: customer_comment_path(@comment.customer_id, @comment.id), local: true do |f| %>
+  <%= f.select :method, Comment.methods.keys.map %>
+  <%= f.select :target, Comment.targets.keys.map %>
+  <%= f.select :status, Comment.statuses.keys.map %>
+  <%= f.text_area :comment %>
+  <%= f.submit "更新する" %>
+<% end %>

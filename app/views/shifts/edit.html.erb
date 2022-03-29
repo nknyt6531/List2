@@ -1,0 +1,16 @@
+<div class="container">
+  <h2 class="font-weight-bold mt-3">シフト編集</h2>
+  
+  <%= form_with model: @shift, url: shift_path, local:true do |f| %>
+    <div class="form-group mt-3">
+      <label for="start_time">開始時間</label>
+      <%= f.time_field :start, class: "form-control"%>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="finish_time">終了時間</label>
+      <%= f.time_field :finish, class: "form-control"%>
+    </div>
+    <%= f.submit '更新', class: "btn btn-primary btn-block mt-4" %>
+  <% end %>
+</div>
