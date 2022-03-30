@@ -1,8 +1,10 @@
 class CreateComments < ActiveRecord::Migration[5.2]
   def change
     create_table :comments do |t|
-      t.references :user, null: false, foreign_key: true
-      t.references :customer, null: false, foreign_key: true
+      #t.references :user, null: false, foreign_key: true
+      #t.references :customer, null: false, foreign_key: true
+      t.integer :user_id
+      t.integer :customer_id
       t.text :comment
       t.integer :method, null: false
       t.integer :target, null: false
