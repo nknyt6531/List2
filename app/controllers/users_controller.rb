@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @contact_counts_hour_all_avg = @working_times_all_avg.zero? ? 0 : (@contact_counts_all_avg / @working_times_all_avg).round(2)
     @contact_counts_rate_all_avg = @call_counts_all_avg.zero? ? 0 : (@contact_counts_all_avg / @call_counts_all_avg) .round(3) * 100
     @send_counts_hour_all_avg = @send_counts_all_avg.zero? ? 0 : (@send_counts_all_avg / @working_times_all_avg).round(2)
-    @send_counts_rate_all_avg = @send_counts_all_avg.zero? ? 0 : (@send_counts_all_avg / @contact_counts_all_avg).round(3) * 100
+    @send_counts_rate_all_avg = @send_counts_all_avg.zero? ? 0 : (@send_counts_all_avg / @contact_counts_all_avg).round(2) * 100
   end
 
   def edit
